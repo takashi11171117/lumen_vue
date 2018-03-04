@@ -1,0 +1,37 @@
+Plugin\GeoPlugin\Entity\ProductPaperPrintPrice:
+    type: entity
+    table: dtb_product_paper_print_price
+    repositoryClass: Plugin\GeoPlugin\Repository\ProductPaperPrintPrice
+    id:
+        id:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+            id: true
+            column: price_id
+            generator:
+                strategy: AUTO
+    fields:
+        product_id:
+            type: integer
+            options:
+                unsigned: true
+        paper_id:
+            type: integer
+            options:
+                unsigned: true
+        print_color_face_id:
+            type: integer
+            options:
+                unsigned: true
+        goods_price:
+            type: text
+
+    indexes:
+        dtb_product_paper_print_price:
+            name: dtb_product_paper_print_price
+            columns: [product_id, paper_id, print_color_face_id]
+            type: unique
+
+    lifecycleCallbacks: {  }

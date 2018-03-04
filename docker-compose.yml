@@ -1,0 +1,32 @@
+version: '3'
+services:
+    web:
+        build:
+            context: ./
+            dockerfile: docker/web
+        volumes:
+            - ./:/var/www
+        ports:
+            - "80:80"
+        links:
+            - app
+    app:
+        build:
+            context: ./
+            dockerfile: docker/app
+        volumes:
+            - ./:/var/www
+        links:
+            - database
+        environment:
+            - "DB_PORT=3306"
+            - "DB_HOST=database"
+            - "REDIS_PORT=6379"
+            - "REDIS_HOST=cache"
+    database:
+        image: mysql
+        environment:
+            - "MYSQL_ROOT_PASSWORD=pass"
+            - "MYSQL_DATABASE=test"
+        ports:
+            - "3306:3306"
